@@ -259,12 +259,11 @@ export const config: Options.Testrunner = {
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
     afterTest: async function(test, context, { error, result, duration, passed, retries }) {
-
         if (passed) {
             return;
         }
 
-        // Screenshot of failed test with screenshot name as test name
+        // Screenshot of failed test with screenshot name and datetime stamp as file name
 
         // TODO: Move to utility function if used more than twice
         const currentDateTime = new Date()
@@ -276,7 +275,7 @@ export const config: Options.Testrunner = {
             currentDateTime.getSeconds().toString().padStart(2, '0')].join('')
 
         const testTitleWithUnderscores = test.title.replace(/ /g, '_')
-        const filepath = join('./reports/screenshots/', testTitleWithUnderscores + dateTimeStamp + '.png')
+        const filepath = join(`./reports/screenshots/${test.parent}`, testTitleWithUnderscores + dateTimeStamp + '.png')
         await browser.saveScreenshot(filepath)
         // @ts-ignore
         process.emit('test:screenshot', filepath)

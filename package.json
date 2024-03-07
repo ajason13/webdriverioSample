@@ -20,6 +20,7 @@
     "wdio": "wdio run ./wdio.conf.ts"
   },
   "dependencies": {
+    "wdio-html-nice-reporter": "^8.1.6",
     "wdio-timeline-reporter": "^5.1.4"
   }
 }

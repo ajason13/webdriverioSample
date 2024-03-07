@@ -10,14 +10,16 @@ Runs automated UI tests and spits out a HTML report. If any tests fail, screensh
 
 ### Installing
 
-* Install packages
+- Install packages
+
 ```
 npm install
 ```
 
 ### Executing program
 
-* Run all the tests
+- Run all the tests
+
 ```
 npm run wdio
 ```

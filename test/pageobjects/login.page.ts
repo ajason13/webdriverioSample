@@ -1,41 +1,41 @@
 import { $ } from '@wdio/globals'
-import Page from './page.js';
+import Page from './page.js'
 
 /**
  * sub page containing specific selectors and methods for a specific page
  */
 class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
-    public get inputUsername () {
-        return $('#username');
-    }
+  /**
+   * define selectors using getter methods
+   */
+  public get inputUsername (): ChainablePromiseElement {
+    return $('#username')
+  }
 
-    public get inputPassword () {
-        return $('#password');
-    }
+  public get inputPassword (): ChainablePromiseElement {
+    return $('#password')
+  }
 
-    public get btnSubmit () {
-        return $('button[type="submit"]');
-    }
+  public get btnSubmit (): ChainablePromiseElement {
+    return $('button[type="submit"]')
+  }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
-    public async login (username: string, password: string) {
-        await this.inputUsername.setValue(username);
-        await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
-    }
+  /**
+   * a method to encapsule automation code to interact with the page
+   * e.g. to login using username and password
+   */
+  public async login (username: string, password: string): Promise<void> {
+    await this.inputUsername.setValue(username)
+    await this.inputPassword.setValue(password)
+    await this.btnSubmit.click()
+  }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
-    public open () {
-        return super.open('login');
-    }
+  /**
+   * overwrite specific options to adapt it to page object
+   */
+  public async open (): Promise<string> {
+    return await super.open('login')
+  }
 }
 
-export default new LoginPage();
+export default new LoginPage()

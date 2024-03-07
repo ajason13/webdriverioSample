@@ -34,5 +34,9 @@
     "prettier": "^3.2.5",
     "wdio-html-nice-reporter": "^8.1.6",
     "wdio-timeline-reporter": "^5.1.4"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --fix",
+    "*": "prettier --ignore-unknown --write"
   }
 }

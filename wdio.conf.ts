@@ -1,4 +1,5 @@
 import type { Options } from '@wdio/types'
+import { join } from 'path'
 import { ReportAggregator } from 'wdio-html-nice-reporter'
 let reportAggregator: ReportAggregator
 export const config: Options.Testrunner = {
@@ -145,7 +146,7 @@ export const config: Options.Testrunner = {
             linkScreenshots: true,
             showInBrowser: false,
             collapseTests: true,
-            useOnAfterCommandForScreenshot:false
+            useOnAfterCommandForScreenshot: false
         }]],
 
     // Options to be passed to Mocha.
@@ -257,8 +258,29 @@ export const config: Options.Testrunner = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    // afterTest: function(test, context, { error, result, duration, passed, retries }) {
-    // },
+    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+
+        if (passed) {
+            return;
+        }
+
+        // Screenshot of failed test with screenshot name as test name
+
+        // TODO: Move to utility function if used more than twice
+        const currentDateTime = new Date()
+        const dateTimeStamp = [currentDateTime.getFullYear(),
+            (currentDateTime.getMonth() + 1).toString().padStart(2, '0'),
+            currentDateTime.getDate().toString().padStart(2, '0'),
+            currentDateTime.getHours().toString().padStart(2, '0'),
+            currentDateTime.getMinutes().toString().padStart(2, '0'),
+            currentDateTime.getSeconds().toString().padStart(2, '0')].join('')
+
+        const testTitleWithUnderscores = test.title.replace(/ /g, '_')
+        const filepath = join('./reports/screenshots/', testTitleWithUnderscores + dateTimeStamp + '.png')
+        await browser.saveScreenshot(filepath)
+        // @ts-ignore
+        process.emit('test:screenshot', filepath)
+    },
 
 
     /**

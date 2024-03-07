@@ -4,7 +4,7 @@ Try out WebdriverIO for UI, API, and mobile automation
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+Runs automated UI tests and spits out a HTML report. If any tests fail, screenshots are added. Report is overwritten for every test run
 
 ## Getting Started
 

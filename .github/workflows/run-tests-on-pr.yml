@@ -14,11 +14,9 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Create .env file
-        run: |
-          echo "LOGINNAME=$LOGINNAME" | Out-File -FilePath $env:GITHUB_ENV -Append
-          echo "PASSWORD=$PASSWORD" | Out-File -FilePath $env:GITHUB_ENV -Append
-        env:
-          LOGINNAME: ${{ vars.LOGINNAME }}
-          PASSWORD: ${{ vars.PASSWORD }}
+        uses: SpicyPizza/create-envfile@v2.0.3
+        with:
+          envkey_LOGINNAME: ${{ vars.LOGINNAME }}
+          envkey_PASSWORD: ${{ vars.PASSWORD }}
       - name: Run tests
         run: npm run wdio-local

@@ -12,6 +12,7 @@ Features
 - HTML report after every run
   - On test failure, screenshot(s) is added to report
 - Run locally or in Docker
+- For every pull request, tests are ran to make sure nothing is broken
 
 ## Getting Started
 

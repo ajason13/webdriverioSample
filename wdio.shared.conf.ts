@@ -171,10 +171,10 @@ export const config: Options.Testrunner = {
   // resolved to continue.
   /**
    * Gets executed once before all workers get launched.
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
+   * @param {object} _config wdio configuration object
+   * @param {Array.<Object>} _capabilities list of capabilities details
    */
-  onPrepare: function (config, capabilities) {
+  onPrepare: function (_config, _capabilities) {
     reportAggregator = new ReportAggregator({
       outputDir: './reports/',
       filename: 'master-report.html',
@@ -240,7 +240,7 @@ export const config: Options.Testrunner = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  beforeTest: function (test, context) {
+  beforeTest: function (test, _context) {
     console.log(`\tTest Title: ${test.title}`)
   },
   /**
@@ -258,7 +258,7 @@ export const config: Options.Testrunner = {
   /**
    * Function to be executed after a test (in Mocha/Jasmine only)
    * @param {object}  test             test object
-   * @param {object}  context          scope object the test was executed with
+   * @param {object}  _context          scope object the test was executed with
    * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
    * @param {*}       result.result    return object of test function
    * @param {number}  result.duration  duration of test
@@ -267,8 +267,9 @@ export const config: Options.Testrunner = {
    */
   afterTest: async function (
     test,
-    context,
-    { error, result, duration, passed, retries }
+    _context,
+    // { error, result, duration, passed, retries }
+    { passed }
   ) {
     if (passed) {
       return
@@ -332,12 +333,12 @@ export const config: Options.Testrunner = {
   /**
    * Gets executed after all workers got shut down and the process is about to exit. An error
    * thrown in the onComplete hook will result in the test run failing.
-   * @param {object} exitCode 0 - success, 1 - fail
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {<Object>} results object containing test results
+   * @param {object} _exitCode 0 - success, 1 - fail
+   * @param {object} _config wdio configuration object
+   * @param {Array.<Object>} _capabilities list of capabilities details
+   * @param {<Object>} _results object containing test results
    */
-  onComplete: async function (exitCode, config, capabilities, results) {
+  onComplete: async function (_exitCode, _config, _capabilities, _results) {
     await reportAggregator.createReport()
   }
   /**

@@ -4,6 +4,7 @@ on: [pull_request, workflow_dispatch]
 jobs:
   run-tests:
     runs-on: windows-latest
+    environment: Staging
     steps:
       - name: Checkout
         uses: actions/checkout@v4

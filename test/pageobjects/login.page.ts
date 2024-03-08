@@ -34,7 +34,7 @@ class LoginPage extends Page {
       username === '' ||
       password === ''
     ) {
-      throw new Error('USERNAME or PASSWORD is not set in .env file.')
+      throw new Error('USERNAME or PASSWORD is not set.')
     }
 
     await this.inputUsername.setValue(username)

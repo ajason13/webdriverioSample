@@ -24,6 +24,7 @@
   },
   "scripts": {
     "wdio-local": "wdio run ./wdio.local.conf.ts",
+    "wdio-docker": "wdio run ./wdio.docker.conf.ts",
     "prepare": "husky",
     "lint": "eslint --ignore-path .gitignore --ext .ts"
   },

@@ -5,6 +5,7 @@ export const config = deepmerge(
   sharedConfig,
   {
     host: 'localhost',
+    port: 4444,
     path: '/wd/hub',
     capabilities: [
       {

@@ -4,7 +4,7 @@ Try out WebdriverIO for UI, API, and mobile automation
 
 ## Description
 
-Runs automated UI test
+Runs automated UI test (for now)
 
 Features
 
@@ -12,6 +12,7 @@ Features
 - HTML report after every run
   - On test failure, screenshot(s) is added to report
 - Run locally or in Docker
+- For every pull request, tests are ran to make sure nothing is broken
 
 ## Getting Started
 

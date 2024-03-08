@@ -34,6 +34,7 @@ npm run wdio-local
 ```
 
 - Run all the tests in Docker
+  - Make sure Docker is running first
 
 ```
 npm run wdio-docker

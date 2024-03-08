@@ -13,10 +13,10 @@ jobs:
           node-version: '20.x'
       - name: Install dependencies
         run: npm install
-      - name: Create env file
+      - name: Create .env file
         run: |
-          echo "LOGINNAME=$LOGINNAME"
-          echo "PASSWORD=$PASSWORD"
+          echo "LOGINNAME=$LOGINNAME" | Out-File -FilePath $env:GITHUB_ENV -Append
+          echo "PASSWORD=$PASSWORD" | Out-File -FilePath $env:GITHUB_ENV -Append
         env:
           LOGINNAME: ${{ vars.LOGINNAME }}
           PASSWORD: ${{ vars.PASSWORD }}

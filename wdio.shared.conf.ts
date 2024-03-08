@@ -1,4 +1,5 @@
 import type { Options } from '@wdio/types'
+import * as fs from 'fs'
 import { join } from 'path'
 import { ReportAggregator } from 'wdio-html-nice-reporter'
 let reportAggregator: ReportAggregator
@@ -276,6 +277,13 @@ export const config: Options.Testrunner = {
 
     // Screenshot of failed test with screenshot name and datetime stamp as file name
 
+    const testParentDirectoryPath = `./reports/screenshots/${test.parent}`
+    if (!fs.existsSync(testParentDirectoryPath)) {
+      fs.mkdir(testParentDirectoryPath, (err) => {
+        if (err !== null) throw err
+      })
+    }
+
     // TODO: Move to utility function if used more than twice
     const currentDateTime = new Date()
     const dateTimeStamp = [
@@ -289,11 +297,11 @@ export const config: Options.Testrunner = {
 
     const testTitleWithUnderscores = test.title.replace(/ /g, '_')
     const filepath = join(
-      `./reports/screenshots/${test.parent}`,
-      testTitleWithUnderscores + dateTimeStamp + '.png'
+      testParentDirectoryPath,
+      testTitleWithUnderscores + '_' + dateTimeStamp + '.png'
     )
     await browser.saveScreenshot(filepath)
-    // @ts-expect-error test:screenshot is a valid Signal
+    // @ts-expect-error test:screenshot is a valid event
     process.emit('test:screenshot', filepath)
   },
 

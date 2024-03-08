@@ -4,7 +4,7 @@ Try out WebdriverIO for UI, API, and mobile automation
 
 ## Description
 
-Runs automated UI test (for now)
+Runs automated UI test (in Windows for now)
 
 Features
 

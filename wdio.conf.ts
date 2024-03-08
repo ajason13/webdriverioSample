@@ -73,7 +73,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: 'info',
+  logLevel: 'warn',
   //
   // Set specific log levels per logger
   // loggers:
@@ -241,7 +241,7 @@ export const config: Options.Testrunner = {
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
   beforeTest: function (test, context) {
-    console.log(`Test Title: ${test.title}`)
+    console.log(`\tTest Title: ${test.title}`)
   },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling

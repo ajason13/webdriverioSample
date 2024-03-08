@@ -6,7 +6,7 @@ describe('My Login application', () => {
   it('should login with valid credentials', async () => {
     await LoginPage.open()
 
-    await LoginPage.login('tomsmith', 'SuperSecretPassword!')
+    await LoginPage.login(process.env.LOGINNAME, process.env.PASSWORD)
     await expect(SecurePage.flashAlert).toBeExisting()
     await expect(SecurePage.flashAlert).toHaveText(
       expect.stringContaining('You logged into a secure area!')

@@ -28,6 +28,8 @@ npm install
 
 ### Executing program
 
+- If running tests with secrets/logins, make sure .env file with valid login credentials are in project root directory
+
 - Run all the tests locally
 
 ```

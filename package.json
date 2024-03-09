@@ -24,7 +24,9 @@
   },
   "scripts": {
     "wdio-local": "wdio run ./wdio.local.conf.ts",
+    "wdio-local-smoke": "wdio run ./wdio.local.conf.ts --suite smoke",
     "wdio-docker": "wdio run ./wdio.docker.conf.ts",
+    "wdio-docker-smoke": "wdio run ./wdio.docker.conf.ts --suite smoke",
     "prepare": "husky",
     "lint": "eslint --ignore-path .gitignore --ext .ts"
   },

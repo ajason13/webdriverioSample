@@ -35,6 +35,9 @@ export const config: Options.Testrunner = {
   // of the config file unless it's absolute.
   //
   specs: ['./test/specs/**/*.ts'],
+  suites: {
+    smoke: ['./test/specs/login.success.ts']
+  },
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -172,14 +175,14 @@ export const config: Options.Testrunner = {
   /**
    * Gets executed once before all workers get launched.
    * @param {object} _config wdio configuration object
-   * @param {Array.<Object>} _capabilities list of capabilities details
+   * @param {Array.<Object>} capabilities list of capabilities details
    */
   onPrepare: function (_config, _capabilities) {
     reportAggregator = new ReportAggregator({
       outputDir: './reports/',
       filename: 'master-report.html',
-      reportTitle: 'Master Report',
-      browserName: 'unspecified',
+      reportTitle: 'Aggregated Report',
+      browserName: 'not specified',
       collapseTests: true
     })
     reportAggregator.clean()

@@ -20,6 +20,10 @@ class LoginPage extends Page {
     return $('button[type="submit"]')
   }
 
+  public get flashAlert (): ChainablePromiseElement {
+    return $('#flash')
+  }
+
   /**
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password

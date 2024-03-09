@@ -25,8 +25,12 @@
   "scripts": {
     "wdio-local": "wdio run ./wdio.local.conf.ts",
     "wdio-local-smoke": "wdio run ./wdio.local.conf.ts --suite smoke",
-    "wdio-docker": "wdio run ./wdio.docker.conf.ts",
-    "wdio-docker-smoke": "wdio run ./wdio.docker.conf.ts --suite smoke",
+    "wdio-docker-chrome": "wdio run ./wdio.docker.chrome.conf.ts",
+    "wdio-docker-chrome-smoke": "wdio run ./wdio.docker.chrome..conf.ts --suite smoke",
+    "wdio-docker-firefox": "wdio run ./wdio.docker.firefox.conf.ts",
+    "wdio-docker-firefox-smoke": "wdio run ./wdio.docker.firefox..conf.ts --suite smoke",
+    "wdio-docker-edge": "wdio run ./wdio.docker.edge.conf.ts",
+    "wdio-docker-edge-smoke": "wdio run ./wdio.docker.edge..conf.ts --suite smoke",
     "prepare": "husky",
     "lint": "eslint --ignore-path .gitignore --ext .ts"
   },

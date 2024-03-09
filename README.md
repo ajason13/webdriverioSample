@@ -36,9 +36,22 @@ npm install
 npm run wdio-local
 ```
 
-- Run all the tests in Docker
+- Run tests in Docker
   - Make sure Docker is running first
+- Chrome
 
 ```
-npm run wdio-docker
+npm run wdio-docker-chrome
+```
+
+- Firefox
+
+```
+npm run wdio-docker-firefox
+```
+
+- Edge
+
+```
+npm run wdio-docker-edge
 ```

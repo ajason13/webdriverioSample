@@ -7,6 +7,12 @@ export const config = deepmerge(
     capabilities: [
       {
         browserName: 'chrome'
+      },
+      {
+        browserName: 'firefox'
+      },
+      {
+        browserName: 'MicrosoftEdge'
       }
     ]
   },

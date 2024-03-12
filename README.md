@@ -44,6 +44,10 @@ npx appium-installer
 ```
 npm run wdio-local
 ```
+- Run Appium (mobile Chrome)
+```
+npm run wdio-appium
+```
 
 - Run web browser tests in Docker
   - Make sure Docker is running first

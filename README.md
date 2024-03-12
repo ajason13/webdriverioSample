@@ -45,6 +45,7 @@ npx appium-installer
 npm run wdio-local
 ```
 - Run Appium (mobile Chrome)
+  - Make sure Android emulator is running and matches deviceName in wdio.appium.conf.ts
 ```
 npm run wdio-appium
 ```

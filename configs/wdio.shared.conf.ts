@@ -1,5 +1,5 @@
 import type { Options } from '@wdio/types'
-import allure from 'allure-commandline'
+// import allure from 'allure-commandline'
 import * as os from 'os'
 export const config: Options.Testrunner = {
   //
@@ -270,7 +270,7 @@ export const config: Options.Testrunner = {
 
     // Screenshot of failed test
     await browser.takeScreenshot()
-  },
+  }
 
   /**
    * Hook that gets executed after the suite has ended
@@ -312,27 +312,27 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} _capabilities list of capabilities details
    * @param {<Object>} _results object containing test results
    */
-  onComplete: async function (_exitCode, _config, _capabilities, _results) {
-    const reportError = new Error('Could not generate Allure report')
-    const generation = allure(['generate', 'allure-results', '--clean'])
-    await new Promise<void>((resolve, reject) => {
-      const generationTimeout = setTimeout(() => {
-        reject(reportError)
-      }, 10000)
+  // onComplete: async function (_exitCode, _config, _capabilities, _results) {
+  //   const reportError = new Error('Could not generate Allure report')
+  //   const generation = allure(['generate', 'allure-results', '--clean'])
+  //   await new Promise<void>((resolve, reject) => {
+  //     const generationTimeout = setTimeout(() => {
+  //       reject(reportError)
+  //     }, 5000)
 
-      generation.on('exit', function (exitCode: number) {
-        clearTimeout(generationTimeout)
+  //     generation.on('exit', function (exitCode: number) {
+  //       clearTimeout(generationTimeout)
 
-        if (exitCode !== 0) {
-          reject(reportError)
-          return
-        }
+  //       if (exitCode !== 0) {
+  //         reject(reportError)
+  //         return
+  //       }
 
-        console.log('Allure report successfully generated')
-        resolve()
-      })
-    })
-  }
+  //       console.log('Allure report successfully generated')
+  //       resolve()
+  //     })
+  //   })
+  // }
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

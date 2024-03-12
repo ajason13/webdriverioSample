@@ -77,9 +77,16 @@ npm run wdio-docker-edge
 ```
 
 - View Report
+  - In Windows Powershell
 
 ```
-allure open allure-report
+allure generate allure-results; allure open
+```
+
+- Everywhere else
+
+```
+allure generate allure-results && allure open
 ```
 
 ## Contributing

@@ -11,7 +11,7 @@ export const config: Options.Testrunner = {
   autoCompileOpts: {
     autoCompile: true,
     tsNodeOpts: {
-      project: './tsconfig.json',
+      project: '../tsconfig.json',
       transpileOnly: true
     }
   },
@@ -32,9 +32,9 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ['./test/specs/**/*.ts'],
+  specs: ['../test/specs/**/*.ts'],
   suites: {
-    smoke: ['./test/specs/login.success.ts']
+    smoke: ['../test/specs/login.success.ts']
   },
   // Patterns to exclude.
   exclude: [

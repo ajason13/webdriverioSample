@@ -1,5 +1,5 @@
 import { deepmerge } from 'deepmerge-ts'
-import { config as sharedConfig } from './wdio.shared.conf.ts'
+import { config as sharedConfig } from '../wdio.shared.conf.ts'
 
 export const config = deepmerge(
   sharedConfig,
@@ -17,7 +17,11 @@ export const config = deepmerge(
         'appium:orientation': 'PORTRAIT',
         'appium:newCommandTimeout': 240
       }
-    ]
+    ],
+    specs: ['../../test/specs/**/*.ts'],
+    suites: {
+      smoke: ['../../test/specs/login.success.ts']
+    }
   },
   { clone: false }
 )

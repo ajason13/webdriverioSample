@@ -1,22 +1,16 @@
 import { deepmerge } from 'deepmerge-ts'
-import { config as sharedConfig } from './wdio.shared.conf.ts'
+import { config as sharedConfig } from './wdio.docker.shared.conf.ts'
 
 export const config = deepmerge(
   sharedConfig,
   {
-    host: 'localhost',
-    port: 4444,
-    path: '/wd/hub',
     capabilities: [
       {
-        browserName: 'chrome'
+        browserName: 'MicrosoftEdge'
       }
     ],
-    sync: true,
-    services: ['docker'],
-    dockerLogs: './',
     dockerOptions: {
-      image: 'selenium/standalone-chrome',
+      image: 'selenium/standalone-edge',
       healthCheck: 'http://localhost:4444',
       options: {
         p: ['4444:4444'],

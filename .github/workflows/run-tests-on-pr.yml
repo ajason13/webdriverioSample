@@ -2,7 +2,7 @@ name: run-tests-on-pull-request-creation
 run-name: ${{ github.actor }} created a PR
 on: [pull_request, workflow_dispatch]
 env:
-  DISPLAY: :0.0
+  DISPLAY: :0
 jobs:
   run-tests:
     runs-on: ubuntu-latest

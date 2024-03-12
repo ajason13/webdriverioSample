@@ -76,6 +76,12 @@ npm run wdio-docker-firefox
 npm run wdio-docker-edge
 ```
 
+- View Report
+
+```
+allure open allure-report
+```
+
 ## Contributing
 
 ### IDE Setup

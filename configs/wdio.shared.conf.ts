@@ -247,7 +247,7 @@ export const config: Options.Testrunner = {
   // },
   /**
    * Function to be executed after a test (in Mocha/Jasmine only)
-   * @param {object}  test             test object
+   * @param {object}  _test             test object
    * @param {object}  _context          scope object the test was executed with
    * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
    * @param {*}       result.result    return object of test function
@@ -256,7 +256,7 @@ export const config: Options.Testrunner = {
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
   afterTest: async function (
-    test,
+    _test,
     _context,
     // { error, result, duration, passed, retries }
     { passed }
@@ -265,38 +265,8 @@ export const config: Options.Testrunner = {
       return
     }
 
-    // TODO: reimplement in Allure reporting
-    // Screenshot of failed test with screenshot name and datetime stamp as file name
-
+    // Screenshot of failed test
     await browser.takeScreenshot()
-
-    // Old cold for HTML Nice reporter
-    // const testParentDirectoryPath = `./reports/screenshots/${test.parent}`
-    // if (!fs.existsSync(testParentDirectoryPath)) {
-    //   fs.mkdir(testParentDirectoryPath, (err) => {
-    //     if (err !== null) throw err
-    //   })
-    // }
-
-    // // TODO: Move to utility function if used more than twice
-    // const currentDateTime = new Date()
-    // const dateTimeStamp = [
-    //   currentDateTime.getFullYear(),
-    //   (currentDateTime.getMonth() + 1).toString().padStart(2, '0'),
-    //   currentDateTime.getDate().toString().padStart(2, '0'),
-    //   currentDateTime.getHours().toString().padStart(2, '0'),
-    //   currentDateTime.getMinutes().toString().padStart(2, '0'),
-    //   currentDateTime.getSeconds().toString().padStart(2, '0')
-    // ].join('')
-
-    // const testTitleWithUnderscores = test.title.replace(/ /g, '_')
-    // const filepath = join(
-    //   testParentDirectoryPath,
-    //   testTitleWithUnderscores + '_' + dateTimeStamp + '.png'
-    // )
-    // await browser.saveScreenshot(filepath)
-    // // @ts-expect-error test:screenshot is a valid event
-    // process.emit('test:screenshot', filepath)
   },
 
   /**
@@ -334,22 +304,25 @@ export const config: Options.Testrunner = {
   /**
    * Gets executed after all workers got shut down and the process is about to exit. An error
    * thrown in the onComplete hook will result in the test run failing.
-   * @param {object} exitCode 0 - success, 1 - fail
-   * @param {object} config wdio configuration object
-   * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {<Object>} results object containing test results
+   * @param {object} _exitCode 0 - success, 1 - fail
+   * @param {object} _config wdio configuration object
+   * @param {Array.<Object>} _capabilities list of capabilities details
+   * @param {<Object>} _results object containing test results
    */
-  onComplete: async function (exitCode, config, capabilities, results) {
+  onComplete: async function (_exitCode, _config, _capabilities, _results) {
     const reportError = new Error('Could not generate Allure report')
     const generation = allure(['generate', 'allure-results', '--clean'])
     await new Promise<void>((resolve, reject) => {
-      const generationTimeout = setTimeout(() => { reject(reportError) }, 5000)
+      const generationTimeout = setTimeout(() => {
+        reject(reportError)
+      }, 5000)
 
       generation.on('exit', function (exitCode: number) {
         clearTimeout(generationTimeout)
 
         if (exitCode !== 0) {
-          reject(reportError); return
+          reject(reportError)
+          return
         }
 
         console.log('Allure report successfully generated')

@@ -21,6 +21,8 @@ jobs:
           node-version: '20.x'
       - name: Install dependencies
         run: npm install
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1.5.0
       - name: Create .env file
         uses: SpicyPizza/create-envfile@v2.0.3
         with:

@@ -44,8 +44,10 @@ npx appium-installer
 ```
 npm run wdio-local
 ```
+
 - Run Appium (mobile Chrome)
   - Make sure Android emulator is running and matches deviceName in wdio.appium.conf.ts
+
 ```
 npm run wdio-appium
 ```
@@ -69,3 +71,13 @@ npm run wdio-docker-firefox
 ```
 npm run wdio-docker-edge
 ```
+
+## Contributing
+
+### IDE Setup
+
+- Started project with VS Code in Windows 10
+
+### Pull Requests
+
+- When PR is created, a build will be sent to a Windows VM and runs the local command. If the run passes, then the PR can be merged. If the run fails, then PR won't merge. New commits to the branch/PR will re-run.

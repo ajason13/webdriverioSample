@@ -9,7 +9,7 @@ Runs automated UI test (in Windows for now)
 Features
 
 - Run UI tests in Chrome
-- HTML report after every run
+- Allure report after every run
   - On test failure, screenshot(s) is added to report
 - Run locally or in Docker
 - For every pull request, tests are ran to make sure nothing is broken
@@ -23,6 +23,8 @@ Features
 ```
 npm install
 ```
+
+- [Install Allure locally](https://allurereport.org/docs/gettingstarted-installation/) if you want to view report(s).
 
 - If running in docker, make sure you have Docker Engine installed and running
 
@@ -72,6 +74,19 @@ npm run wdio-docker-firefox
 
 ```
 npm run wdio-docker-edge
+```
+
+- View Report
+  - In Windows Powershell
+
+```
+allure generate allure-results; allure open
+```
+
+- Everywhere else
+
+```
+allure generate allure-results && allure open
 ```
 
 ## Contributing

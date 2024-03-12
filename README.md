@@ -44,8 +44,12 @@ npx appium-installer
 ```
 npm run wdio-local
 ```
+
 - Run Appium (mobile Chrome)
   - Make sure Android emulator is running and matches deviceName in wdio.appium.conf.ts
+  - Known issue (not really?):
+    - After test run completes, appium-service throws `ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)`, but all the tests still passed/failed.
+
 ```
 npm run wdio-appium
 ```
@@ -69,3 +73,16 @@ npm run wdio-docker-firefox
 ```
 npm run wdio-docker-edge
 ```
+
+## Contributing
+
+### IDE Setup
+
+- Started project with VS Code in Windows 10
+- For VS Code:
+  - [Helps to have tsc: watch running.](https://code.visualstudio.com/docs/typescript/typescript-compiling#_transpile-typescript-into-javascript) But remember to run every time you re-open VS Code.
+  - [Hide compiled \*.js files](https://code.visualstudio.com/docs/typescript/typescript-compiling#_hiding-derived-javascript-files)
+
+### Pull Requests
+
+- When PR is created, a build will be sent to a Windows VM and runs `wdio-local`. If the run passes, then the PR can be merged. If the run fails, then PR won't merge. New commits to the branch/PR will re-run.

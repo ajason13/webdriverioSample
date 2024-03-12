@@ -1,8 +1,6 @@
 import type { Options } from '@wdio/types'
-import * as fs from 'fs'
-import { join } from 'path'
-import { ReportAggregator } from 'wdio-html-nice-reporter'
-let reportAggregator: ReportAggregator
+// import * as fs from 'fs'
+// import { join } from 'path'
 export const config: Options.Testrunner = {
   //
   // ====================
@@ -13,7 +11,7 @@ export const config: Options.Testrunner = {
   autoCompileOpts: {
     autoCompile: true,
     tsNodeOpts: {
-      project: './tsconfig.json',
+      project: '../tsconfig.json',
       transpileOnly: true
     }
   },
@@ -34,9 +32,9 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ['./test/specs/**/*.ts'],
+  specs: ['../test/specs/**/*.ts'],
   suites: {
-    smoke: ['./test/specs/login.success.ts']
+    smoke: ['../test/specs/login.success.ts']
   },
   // Patterns to exclude.
   exclude: [
@@ -141,21 +139,7 @@ export const config: Options.Testrunner = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   // reporters: ['spec'],
-  reporters: [
-    'spec',
-    [
-      'html-nice',
-      {
-        outputDir: './reports/',
-        filename: 'report.html',
-        reportTitle: 'Test Report',
-        linkScreenshots: true,
-        showInBrowser: false,
-        collapseTests: true,
-        useOnAfterCommandForScreenshot: false
-      }
-    ]
-  ],
+  reporters: ['spec'],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -174,19 +158,11 @@ export const config: Options.Testrunner = {
   // resolved to continue.
   /**
    * Gets executed once before all workers get launched.
-   * @param {object} _config wdio configuration object
+   * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  onPrepare: function (_config, _capabilities) {
-    reportAggregator = new ReportAggregator({
-      outputDir: './reports/',
-      filename: 'master-report.html',
-      reportTitle: 'Aggregated Report',
-      browserName: 'not specified',
-      collapseTests: true
-    })
-    reportAggregator.clean()
-  },
+  // onPrepare: function (config, capabilities) {
+  // },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -245,7 +221,7 @@ export const config: Options.Testrunner = {
    */
   beforeTest: function (test, _context) {
     console.log(`\tTest Title: ${test.title}`)
-  },
+  }
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
@@ -268,45 +244,46 @@ export const config: Options.Testrunner = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  afterTest: async function (
-    test,
-    _context,
-    // { error, result, duration, passed, retries }
-    { passed }
-  ) {
-    if (passed) {
-      return
-    }
+  // afterTest: async function (
+  //   test,
+  //   _context,
+  //   // { error, result, duration, passed, retries }
+  //   { passed }
+  // ) {
+  //   if (passed) {
+  //     return
+  //   }
 
-    // Screenshot of failed test with screenshot name and datetime stamp as file name
+  //   // TODO: reimplement in Allure reporting
+  //   // Screenshot of failed test with screenshot name and datetime stamp as file name
 
-    const testParentDirectoryPath = `./reports/screenshots/${test.parent}`
-    if (!fs.existsSync(testParentDirectoryPath)) {
-      fs.mkdir(testParentDirectoryPath, (err) => {
-        if (err !== null) throw err
-      })
-    }
+  //   const testParentDirectoryPath = `./reports/screenshots/${test.parent}`
+  //   if (!fs.existsSync(testParentDirectoryPath)) {
+  //     fs.mkdir(testParentDirectoryPath, (err) => {
+  //       if (err !== null) throw err
+  //     })
+  //   }
 
-    // TODO: Move to utility function if used more than twice
-    const currentDateTime = new Date()
-    const dateTimeStamp = [
-      currentDateTime.getFullYear(),
-      (currentDateTime.getMonth() + 1).toString().padStart(2, '0'),
-      currentDateTime.getDate().toString().padStart(2, '0'),
-      currentDateTime.getHours().toString().padStart(2, '0'),
-      currentDateTime.getMinutes().toString().padStart(2, '0'),
-      currentDateTime.getSeconds().toString().padStart(2, '0')
-    ].join('')
+  //   // TODO: Move to utility function if used more than twice
+  //   const currentDateTime = new Date()
+  //   const dateTimeStamp = [
+  //     currentDateTime.getFullYear(),
+  //     (currentDateTime.getMonth() + 1).toString().padStart(2, '0'),
+  //     currentDateTime.getDate().toString().padStart(2, '0'),
+  //     currentDateTime.getHours().toString().padStart(2, '0'),
+  //     currentDateTime.getMinutes().toString().padStart(2, '0'),
+  //     currentDateTime.getSeconds().toString().padStart(2, '0')
+  //   ].join('')
 
-    const testTitleWithUnderscores = test.title.replace(/ /g, '_')
-    const filepath = join(
-      testParentDirectoryPath,
-      testTitleWithUnderscores + '_' + dateTimeStamp + '.png'
-    )
-    await browser.saveScreenshot(filepath)
-    // @ts-expect-error test:screenshot is a valid event
-    process.emit('test:screenshot', filepath)
-  },
+  //   const testTitleWithUnderscores = test.title.replace(/ /g, '_')
+  //   const filepath = join(
+  //     testParentDirectoryPath,
+  //     testTitleWithUnderscores + '_' + dateTimeStamp + '.png'
+  //   )
+  //   await browser.saveScreenshot(filepath)
+  //   // @ts-expect-error test:screenshot is a valid event
+  //   process.emit('test:screenshot', filepath)
+  // },
 
   /**
    * Hook that gets executed after the suite has ended
@@ -343,14 +320,13 @@ export const config: Options.Testrunner = {
   /**
    * Gets executed after all workers got shut down and the process is about to exit. An error
    * thrown in the onComplete hook will result in the test run failing.
-   * @param {object} _exitCode 0 - success, 1 - fail
-   * @param {object} _config wdio configuration object
-   * @param {Array.<Object>} _capabilities list of capabilities details
-   * @param {<Object>} _results object containing test results
+   * @param {object} exitCode 0 - success, 1 - fail
+   * @param {object} config wdio configuration object
+   * @param {Array.<Object>} capabilities list of capabilities details
+   * @param {<Object>} results object containing test results
    */
-  onComplete: async function (_exitCode, _config, _capabilities, _results) {
-    await reportAggregator.createReport()
-  }
+  // onComplete: async function (exitCode, config, capabilities, results) {
+  // }
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

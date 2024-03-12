@@ -24,19 +24,28 @@ Features
 npm install
 ```
 
-- If running in docker, make sure you have it installed
+- If running in docker, make sure you have Docker Engine installed and running
+
+- If running Appium, go through the installer
+
+```
+npx appium-installer
+```
+
+- When setting up the Android Environment, may need to install Java SE Runtime and adb (to create/manage Android emulator(s))
+- iOS is unavailable on Windows
 
 ### Executing program
 
 - If running tests with secrets/logins, make sure .env file with valid login credentials are in project root directory
 
-- Run all the tests locally
+- Run all web browser tests locally
 
 ```
 npm run wdio-local
 ```
 
-- Run tests in Docker
+- Run web browser tests in Docker
   - Make sure Docker is running first
 - Chrome
 

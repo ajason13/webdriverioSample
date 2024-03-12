@@ -6,13 +6,22 @@ export const config = deepmerge(
   {
     capabilities: [
       {
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+          args: ['--headless']
+        }
       },
       {
-        browserName: 'firefox'
+        browserName: 'firefox',
+        'moz:firefoxOptions': {
+          args: ['--headless']
+        }
       },
       {
-        browserName: 'MicrosoftEdge'
+        browserName: 'MicrosoftEdge',
+        'ms:edgeOptions': {
+          args: ['--headless']
+        }
       }
     ]
   },

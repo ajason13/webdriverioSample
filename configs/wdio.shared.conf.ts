@@ -1,6 +1,7 @@
 import type { Options } from '@wdio/types'
 // import * as fs from 'fs'
 // import { join } from 'path'
+import allure from 'allure-commandline'
 export const config: Options.Testrunner = {
   //
   // ====================
@@ -139,7 +140,17 @@ export const config: Options.Testrunner = {
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
   // reporters: ['spec'],
-  reporters: ['spec'],
+  reporters: [
+    'spec',
+    [
+      'allure',
+      {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false
+      }
+    ]
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -221,7 +232,7 @@ export const config: Options.Testrunner = {
    */
   beforeTest: function (test, _context) {
     console.log(`\tTest Title: ${test.title}`)
-  }
+  },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
@@ -244,46 +255,49 @@ export const config: Options.Testrunner = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: async function (
-  //   test,
-  //   _context,
-  //   // { error, result, duration, passed, retries }
-  //   { passed }
-  // ) {
-  //   if (passed) {
-  //     return
-  //   }
+  afterTest: async function (
+    test,
+    _context,
+    // { error, result, duration, passed, retries }
+    { passed }
+  ) {
+    if (passed) {
+      return
+    }
 
-  //   // TODO: reimplement in Allure reporting
-  //   // Screenshot of failed test with screenshot name and datetime stamp as file name
+    // TODO: reimplement in Allure reporting
+    // Screenshot of failed test with screenshot name and datetime stamp as file name
 
-  //   const testParentDirectoryPath = `./reports/screenshots/${test.parent}`
-  //   if (!fs.existsSync(testParentDirectoryPath)) {
-  //     fs.mkdir(testParentDirectoryPath, (err) => {
-  //       if (err !== null) throw err
-  //     })
-  //   }
+    await browser.takeScreenshot()
 
-  //   // TODO: Move to utility function if used more than twice
-  //   const currentDateTime = new Date()
-  //   const dateTimeStamp = [
-  //     currentDateTime.getFullYear(),
-  //     (currentDateTime.getMonth() + 1).toString().padStart(2, '0'),
-  //     currentDateTime.getDate().toString().padStart(2, '0'),
-  //     currentDateTime.getHours().toString().padStart(2, '0'),
-  //     currentDateTime.getMinutes().toString().padStart(2, '0'),
-  //     currentDateTime.getSeconds().toString().padStart(2, '0')
-  //   ].join('')
+    // Old cold for HTML Nice reporter
+    // const testParentDirectoryPath = `./reports/screenshots/${test.parent}`
+    // if (!fs.existsSync(testParentDirectoryPath)) {
+    //   fs.mkdir(testParentDirectoryPath, (err) => {
+    //     if (err !== null) throw err
+    //   })
+    // }
 
-  //   const testTitleWithUnderscores = test.title.replace(/ /g, '_')
-  //   const filepath = join(
-  //     testParentDirectoryPath,
-  //     testTitleWithUnderscores + '_' + dateTimeStamp + '.png'
-  //   )
-  //   await browser.saveScreenshot(filepath)
-  //   // @ts-expect-error test:screenshot is a valid event
-  //   process.emit('test:screenshot', filepath)
-  // },
+    // // TODO: Move to utility function if used more than twice
+    // const currentDateTime = new Date()
+    // const dateTimeStamp = [
+    //   currentDateTime.getFullYear(),
+    //   (currentDateTime.getMonth() + 1).toString().padStart(2, '0'),
+    //   currentDateTime.getDate().toString().padStart(2, '0'),
+    //   currentDateTime.getHours().toString().padStart(2, '0'),
+    //   currentDateTime.getMinutes().toString().padStart(2, '0'),
+    //   currentDateTime.getSeconds().toString().padStart(2, '0')
+    // ].join('')
+
+    // const testTitleWithUnderscores = test.title.replace(/ /g, '_')
+    // const filepath = join(
+    //   testParentDirectoryPath,
+    //   testTitleWithUnderscores + '_' + dateTimeStamp + '.png'
+    // )
+    // await browser.saveScreenshot(filepath)
+    // // @ts-expect-error test:screenshot is a valid event
+    // process.emit('test:screenshot', filepath)
+  },
 
   /**
    * Hook that gets executed after the suite has ended
@@ -325,8 +339,24 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: async function (exitCode, config, capabilities, results) {
-  // }
+  onComplete: async function (exitCode, config, capabilities, results) {
+    const reportError = new Error('Could not generate Allure report')
+    const generation = allure(['generate', 'allure-results', '--clean'])
+    await new Promise<void>((resolve, reject) => {
+      const generationTimeout = setTimeout(() => { reject(reportError) }, 5000)
+
+      generation.on('exit', function (exitCode: number) {
+        clearTimeout(generationTimeout)
+
+        if (exitCode !== 0) {
+          reject(reportError); return
+        }
+
+        console.log('Allure report successfully generated')
+        resolve()
+      })
+    })
+  }
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session

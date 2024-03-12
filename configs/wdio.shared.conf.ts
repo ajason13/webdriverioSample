@@ -1,7 +1,6 @@
 import type { Options } from '@wdio/types'
-// import * as fs from 'fs'
-// import { join } from 'path'
 import allure from 'allure-commandline'
+import * as os from 'os'
 export const config: Options.Testrunner = {
   //
   // ====================
@@ -147,7 +146,11 @@ export const config: Options.Testrunner = {
       {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false
+        disableWebdriverScreenshotsReporting: false,
+        os_platform: os.platform(),
+        os_release: os.release(),
+        os_version: os.version(),
+        node_version: process.version
       }
     ]
   ],

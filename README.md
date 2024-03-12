@@ -4,7 +4,7 @@ Try out WebdriverIO for UI, API, and mobile automation
 
 ## Description
 
-Runs automated UI test (in Windows for now)
+Runs automated UI test (in Windows and Ubuntu for now)
 
 Features
 
@@ -100,4 +100,4 @@ allure generate allure-results && allure open
 
 ### Pull Requests
 
-- When PR is created, a build will be sent to a Windows VM and runs `wdio-local`. If the run passes, then the PR can be merged. If the run fails, then PR won't merge. New commits to the branch/PR will re-run.
+- When PR is created, a build will be sent to a Ubuntu VM and runs `wdio-local`. If the run passes, then the PR can be merged. If the run fails, then PR won't merge. New commits to the branch/PR will re-run.

@@ -13,6 +13,7 @@ Features
   - On test failure, screenshot(s) is added to report
 - Run locally or in Docker
 - For every pull request, tests are ran to make sure nothing is broken
+  - Historical runs can be found [here](https://ajason13.github.io/webdriverioSample/)
 
 ## Getting Started
 

@@ -77,7 +77,7 @@ npm run wdio-docker-firefox
 npm run wdio-docker-edge
 ```
 
-- View Report
+- View Report locally
   - In Windows Powershell
 
 ```

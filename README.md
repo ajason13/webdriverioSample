@@ -1,6 +1,6 @@
 # WebdriverIO Sample Project
 
-Try out WebdriverIO for UI, API, and mobile automation
+Try out WebdriverIO for UI and Mbile automation
 
 ## Description
 
@@ -8,10 +8,10 @@ Runs automated UI test (in Windows and Ubuntu for now)
 
 Features
 
-- Run UI tests in Chrome
+- Run UI tests in Chrome, Firefox, and Edge
 - Allure report after every run
   - On test failure, screenshot(s) is added to report
-- Run locally or in Docker
+- Run locally or in Docker (excluding mobile)
 - For every pull request, tests are ran to make sure nothing is broken
   - Historical runs can be found [here](https://ajason13.github.io/webdriverioSample/)
 

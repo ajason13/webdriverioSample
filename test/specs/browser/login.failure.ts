@@ -1,5 +1,5 @@
 import { expect } from '@wdio/globals'
-import LoginPage from '../pageobjects/login.page.js'
+import LoginPage from '../../pageobjects/login.page.js'
 
 describe('Login page', () => {
   it('should error with invalid credentials', async () => {

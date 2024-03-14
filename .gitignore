@@ -3,3 +3,4 @@ docker-log.txt
 .env
 allure-report/
 allure-results/
+apps/

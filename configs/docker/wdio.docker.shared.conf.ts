@@ -10,9 +10,9 @@ export const config = deepmerge(
     sync: true,
     services: ['docker'],
     dockerLogs: '../../',
-    specs: ['../../test/specs/**/*.ts'],
+    specs: ['../../test/specs/browser/**/*.ts'],
     suites: {
-      smoke: ['../../test/specs/login.success.ts']
+      smoke: ['../../test/specs/browser/login.success.ts']
     }
   },
   { clone: false }

@@ -36,6 +36,7 @@
     "wdio-docker-edge": "wdio run ./configs/docker/wdio.docker.edge.conf.ts",
     "wdio-docker-edge-smoke": "wdio run ./configs/docker/wdio.docker.edge..conf.ts --suite smoke",
     "wdio-appium-android-chrome": "wdio run ./configs/appium/wdio.appium.android.chrome.conf.ts",
+    "wdio-appium-android-native": "wdio run ./configs/appium/wdio.appium.android.native.conf.ts",
     "prepare": "husky",
     "lint": "eslint --ignore-path .gitignore --ext .ts"
   },

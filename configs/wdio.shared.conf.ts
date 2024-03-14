@@ -32,9 +32,9 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  specs: ['../test/specs/**/*.ts'],
+  specs: ['../test/specs/browser/**/*.ts'],
   suites: {
-    smoke: ['../test/specs/login.success.ts']
+    smoke: ['../test/specs/browser/login.success.ts']
   },
   // Patterns to exclude.
   exclude: [
@@ -147,6 +147,7 @@ export const config: Options.Testrunner = {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
+        disableMochaHooks: true,
         reportedEnvironmentVars: {
           os_platform: os.platform(),
           os_release: os.release(),

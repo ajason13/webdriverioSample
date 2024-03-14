@@ -5,11 +5,7 @@ export const config = deepmerge(
   sharedConfig,
   {
     port: 4723,
-    services: ['appium'],
-    specs: ['../../test/specs/**/*.ts'],
-    suites: {
-      smoke: ['../../test/specs/login.success.ts']
-    }
+    services: ['appium']
   },
   { clone: false }
 )

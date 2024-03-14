@@ -49,12 +49,21 @@ npm run wdio-local
 ```
 
 - Run Appium (mobile Chrome)
-  - Make sure Android emulator is running and matches deviceName in wdio.appium.conf.ts
+  - Make sure Android emulator is running and matches deviceName in `wdio.appium.android.chrome.conf.ts`
   - Known issue (not really?):
     - After test run completes, appium-service throws `ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)`, but all the tests still passed/failed.
 
 ```
 npm run wdio-appium-android-chrome
+```
+
+- Run Appium (native Android)
+  - Create a `./apps` directory at the root of this project. Download the app files (`.zip`/`.apk`) with version >= `1.0.0`, which can be found [here](https://github.com/webdriverio/native-demo-app/releases), into the `./apps` folder.
+  - Make sure Android emulator is running and matches deviceName in `wdio.appium.android.native.conf.ts`
+  - Make sure app name is updated in `wdio.appium.android.native.conf.ts`
+
+```
+npm run wdio-appium-android-native
 ```
 
 - Run web browser tests in Docker

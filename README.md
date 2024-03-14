@@ -1,6 +1,6 @@
 # WebdriverIO Sample Project
 
-Try out WebdriverIO for UI and Mbile automation
+Try out WebdriverIO for UI and Mobile automation
 
 ## Description
 

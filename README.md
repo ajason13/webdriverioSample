@@ -54,7 +54,7 @@ npm run wdio-local
     - After test run completes, appium-service throws `ERROR @wdio/appium-service: Appium exited before timeout (exit code: null)`, but all the tests still passed/failed.
 
 ```
-npm run wdio-appium
+npm run wdio-appium-android-chrome
 ```
 
 - Run web browser tests in Docker

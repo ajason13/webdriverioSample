@@ -38,7 +38,7 @@ class LoginPage extends Page {
       username === '' ||
       password === ''
     ) {
-      throw new Error('USERNAME or PASSWORD is not set.')
+      throw new Error('LOGINNAME or PASSWORD is not set.')
     }
 
     await this.inputUsername.setValue(username)

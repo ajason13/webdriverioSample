@@ -22,7 +22,7 @@ export async function openDrag (): Promise<void> {
   await $('~Drag').click()
 }
 
-export async function waitForTabBarShown (): Promise<boolean> {
+export async function waitForTabBarToBeDisplayed (): Promise<boolean> {
   return await $('~Home').waitForDisplayed({
     timeout: 20000
   })

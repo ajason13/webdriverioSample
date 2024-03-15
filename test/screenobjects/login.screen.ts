@@ -62,13 +62,19 @@ class LoginScreen extends AppScreen {
     await (await this.biometricButton).click()
   }
 
-  async submitLoginForm ({
-    username,
-    password
-  }: {
-    username: string
-    password: string
-  }): Promise<void> {
+  async submitLoginForm (
+    username: string | undefined,
+    password: string | undefined
+  ): Promise<void> {
+    if (
+      username === undefined ||
+      password === undefined ||
+      username === '' ||
+      password === ''
+    ) {
+      throw new Error('MOBILE_LOGINNAME or MOBILE_PASSWORD is not set.')
+    }
+
     await (await this.email).setValue(username)
     await (await this.password).setValue(password)
 
@@ -95,13 +101,19 @@ class LoginScreen extends AppScreen {
     await (await this.loginButton).click()
   }
 
-  async submitSignUpForm ({
-    username,
-    password
-  }: {
-    username: string
-    password: string
-  }): Promise<void> {
+  async submitSignUpForm (
+    username: string | undefined,
+    password: string | undefined
+  ): Promise<void> {
+    if (
+      username === undefined ||
+      password === undefined ||
+      username === '' ||
+      password === ''
+    ) {
+      throw new Error('MOBILE_LOGINNAME or MOBILE_PASSWORD is not set.')
+    }
+
     await (await this.email).setValue(username)
     await (await this.password).setValue(password)
     await (await this.repeatPassword).setValue(password)

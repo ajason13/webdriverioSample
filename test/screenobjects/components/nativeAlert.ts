@@ -16,7 +16,7 @@ const SELECTORS = {
  *
  * The selector for Android differs from iOS
  */
-export async function waitForIsShown (isShown = true): Promise<never> {
+export async function waitForAlertToExist (isShown = true): Promise<never> {
   const selector = driver.isAndroid
     ? SELECTORS.ANDROID.ALERT_TITLE
     : SELECTORS.IOS.ALERT
@@ -56,7 +56,7 @@ export async function tapOnButtonWithText (selector: string): Promise<void> {
  *  The UI hierarchy for Android is different so it will not give the same result as with
  *  iOS if `getText` is being used. Here we construct a method that would give the same output.
  */
-export async function text (): Promise<string> {
+export async function alertText (): Promise<string> {
   if (driver.isIOS) {
     return await $(SELECTORS.IOS.ALERT).getText()
   }

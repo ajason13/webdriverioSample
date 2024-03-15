@@ -1,17 +1,17 @@
 import {
-  text,
+  alertText,
   tapOnButtonWithText,
-  waitForIsShown
+  waitForAlertToExist
 } from '../../screenobjects/components/nativeAlert.ts'
 import {
-  waitForTabBarShown,
+  waitForTabBarToBeDisplayed,
   openLogin
 } from '../../screenobjects/components/tabBar.ts'
 import LoginScreen from '../../screenobjects/login.screen.ts'
 
 describe('Login screen', () => {
   beforeEach(async () => {
-    await waitForTabBarShown()
+    await waitForTabBarToBeDisplayed()
     await openLogin()
     await LoginScreen.waitForIsShown(true)
   })
@@ -20,33 +20,33 @@ describe('Login screen', () => {
     // Always make sure you are on the right tab
     await LoginScreen.tapOnLoginContainerButton()
     // Submit the data
-    await LoginScreen.submitLoginForm({
-      username: 'test@webdriver.io',
-      password: 'Test1234!'
-    })
+    await LoginScreen.submitLoginForm(
+      process.env.MOBILE_LOGINNAME,
+      process.env.MOBILE_PASSWORD
+    )
     // Wait for the alert and validate it
-    await waitForIsShown()
-    await expect(await text()).toContain('Success')
+    await waitForAlertToExist()
+    await expect(await alertText()).toContain('Success')
 
     // Close the alert
     await tapOnButtonWithText('OK')
-    await waitForIsShown(false)
+    await waitForAlertToExist(false)
   })
 
   it('should be able sign up successfully', async () => {
     // Always make sure you are on the right tab
     await LoginScreen.tapOnSignUpContainerButton()
     // Submit the data
-    await LoginScreen.submitSignUpForm({
-      username: 'test@webdriver.io',
-      password: 'Test1234!'
-    })
+    await LoginScreen.submitSignUpForm(
+      process.env.MOBILE_LOGINNAME,
+      process.env.MOBILE_PASSWORD
+    )
     // Wait for the alert and validate it
-    await waitForIsShown()
-    await expect(await text()).toContain('Signed Up')
+    await waitForAlertToExist()
+    await expect(await alertText()).toContain('Signed Up')
 
     // Close the alert
     await tapOnButtonWithText('OK')
-    await waitForIsShown(false)
+    await waitForAlertToExist(false)
   })
 })

@@ -9,6 +9,7 @@ Runs automated UI test (in Windows and Ubuntu for now)
 Features
 
 - Run UI tests in Chrome, Firefox, and Edge
+- Run native Android UI tests in emulator
 - Allure report after every run
   - On test failure, screenshot(s) is added to report
 - Run locally or in Docker (excluding mobile)

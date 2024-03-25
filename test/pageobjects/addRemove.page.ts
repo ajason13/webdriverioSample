@@ -24,6 +24,10 @@ class AddRemovePage extends Page {
     await this.btnAddElement.click()
   }
 
+  public async removeElement (): Promise<void> {
+    await this.btnAddedElement.click()
+  }
+
   /**
    * overwrite specific options to adapt it to page object
    */

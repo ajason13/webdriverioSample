@@ -28,6 +28,7 @@
   },
   "scripts": {
     "wdio-local": "wdio run ./configs/wdio.local.conf.ts",
+    "wdio-local-debug": "wdio run ./configs/wdio.local.debug.conf.ts",
     "wdio-local-smoke": "wdio run ./configs/wdio.local.conf.ts --suite smoke",
     "wdio-docker-chrome": "wdio run ./configs/docker/wdio.docker.chrome.conf.ts",
     "wdio-docker-chrome-smoke": "wdio run ./configs/docker/wdio.docker.chrome..conf.ts --suite smoke",

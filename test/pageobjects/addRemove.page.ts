@@ -43,8 +43,12 @@ class AddRemovePage extends Page {
       throw Error(`Unable to remove ${count} element(s).`)
     }
 
-    for (let i = 0; i < count; i++) {
-      await this.btnAddedElement.click()
+    try {
+      for (let i = 0; i < count; i++) {
+        await this.btnAddedElement.click()
+      }
+    } catch {
+      throw Error('No more removable web elements.')
     }
   }
 

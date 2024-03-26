@@ -43,18 +43,8 @@ class AddRemovePage extends Page {
       throw Error(`Unable to remove ${count} element(s).`)
     }
 
-    if (!(await this.btnAddedElement.isDisplayed())) {
-      throw Error('No removable elements are displayed. Add an element first')
-    }
-
     for (let i = 0; i < count; i++) {
       await this.btnAddedElement.click()
-
-      if (i < count && !(await this.btnAddedElement.isDisplayed())) {
-        throw Error(
-          'No removable elements are displayed. Add an element first'
-        )
-      }
     }
   }
 

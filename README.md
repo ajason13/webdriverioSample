@@ -116,6 +116,7 @@ allure generate allure-results && allure open
 - For VS Code:
   - [Helps to have tsc: watch running.](https://code.visualstudio.com/docs/typescript/typescript-compiling#_transpile-typescript-into-javascript) But remember to run every time you re-open VS Code.
   - [Hide compiled \*.js files](https://code.visualstudio.com/docs/typescript/typescript-compiling#_hiding-derived-javascript-files)
+  - [Debugging with VSCode](https://webdriver.io/docs/debugging/#debugging-with-visual-studio-code-vscode)
 
 ### Pull Requests
 

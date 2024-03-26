@@ -1,5 +1,4 @@
 import type { Options } from '@wdio/types'
-// import allure from 'allure-commandline'
 import * as os from 'os'
 export const config: Options.Testrunner = {
   //

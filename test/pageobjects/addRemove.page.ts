@@ -20,8 +20,14 @@ class AddRemovePage extends Page {
    * a method to encapsule automation code to interact with the page
    * e.g. to login using username and password
    */
-  public async addElement (): Promise<void> {
-    await this.btnAddElement.click()
+  public async addElement (count: number = 1): Promise<void> {
+    if (count < 1) {
+      throw Error(`Unable to add ${count} element(s).`)
+    }
+
+    for (let i = 0; i < count; i++) {
+      await this.btnAddElement.click()
+    }
   }
 
   public async removeElement (): Promise<void> {

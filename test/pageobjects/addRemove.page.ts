@@ -16,9 +16,13 @@ class AddRemovePage extends Page {
     return $('button=Delete')
   }
 
+  public get btnAddedElementList (): ChainablePromiseArray<WebdriverIO.ElementArray> {
+    return $$('button=Delete')
+  }
+
   /**
-   * a method to encapsule automation code to interact with the page
-   * e.g. to login using username and password
+   * Add web elements. Throws an error if 0 or negative number
+   * @param {number} count Default count is 1
    */
   public async addElement (count: number = 1): Promise<void> {
     if (count < 1) {
@@ -30,8 +34,28 @@ class AddRemovePage extends Page {
     }
   }
 
-  public async removeElement (): Promise<void> {
-    await this.btnAddedElement.click()
+  /**
+   * Remove web elements. Throws an error if 0, negative number, or if there is no more removable web elements
+   * @param {number} count Default count is 1
+   */
+  public async removeElement (count: number = 1): Promise<void> {
+    if (count < 1) {
+      throw Error(`Unable to remove ${count} element(s).`)
+    }
+
+    if (!(await this.btnAddedElement.isDisplayed())) {
+      throw Error('No removable elements are displayed. Add an element first')
+    }
+
+    for (let i = 0; i < count; i++) {
+      await this.btnAddedElement.click()
+
+      if (i < count && !(await this.btnAddedElement.isDisplayed())) {
+        throw Error(
+          'No removable elements are displayed. Add an element first'
+        )
+      }
+    }
   }
 
   /**

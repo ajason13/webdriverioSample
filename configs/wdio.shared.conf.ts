@@ -33,7 +33,12 @@ export const config: Options.Testrunner = {
   //
   specs: ['../test/specs/browser/**/*.ts'],
   suites: {
-    smoke: ['../test/specs/browser/login.success.ts']
+    smoke: [
+      '../test/specs/browser/login.success.ts',
+      '../test/specs/browser/dropdownList.ts',
+      '../test/specs/browser/checkboxes.ts',
+      '../test/specs/browser/addAndRemoveElements.ts'
+    ]
   },
   // Patterns to exclude.
   exclude: [

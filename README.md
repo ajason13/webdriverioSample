@@ -18,7 +18,7 @@ Features
 
 ## Getting Started
 
-### Installing
+### Installing (after cloning repository)
 
 - Install packages
 

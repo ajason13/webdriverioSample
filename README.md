@@ -51,10 +51,16 @@ MOBILE_LOGINNAME=test@webdriver.io
 MOBILE_PASSWORD=Test1234!
 ```
 
-- Run all web browser tests locally
+- Run all web browser tests locally (in headless mode)
 
 ```
 npm run wdio-local
+```
+
+- Run a specific spec file
+
+```
+npm run wdio-local -- --spec ./test/specs/browser/checkboxes.ts
 ```
 
 - Run Appium (mobile Chrome)
